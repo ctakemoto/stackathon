@@ -30,3 +30,21 @@ router.get('/:placeId', async (req, res, next) => {
     next(err);
   }
 });
+
+router.post('/', async (req, res, next) => {
+  try {
+    const place = await db.models.place.create({
+      name: req.body.name,
+      address: req.body.address,
+      latitude: req.body.latitude,
+      longitude: req.body.longitude,
+      singleStall: req.body.singleStall,
+      hasLedge: req.body.hasLedge,
+      isFree: req.body.isFree,
+      cleanliness: req.body.cleanliness,
+    });
+    res.json(place);
+  } catch (err) {
+    next(err);
+  }
+});
