@@ -49,7 +49,7 @@ const Place = db.define('place', {
     defaultValue: 'Unknown',
   },
   cleanliness: {
-    type: Sequelize.ENUM('Great', 'Good', 'So-so', 'Fair', 'Unknown'),
+    type: Sequelize.ENUM('Great', 'Good', 'Okay', 'Poor', 'Unknown'),
     defaultValue: 'Unknown',
   },
 });

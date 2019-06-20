@@ -11,14 +11,62 @@ const usersData = [
     name: 'Cara',
     isAdmin: true,
   },
+  {
+    username: 'eman',
+    email: 'ethan@gmail.com',
+    password: '1234',
+    googleId: '',
+    name: 'Ethan',
+    isAdmin: false,
+  },
+  {
+    username: 'tegs',
+    email: 'tegs@gmail.com',
+    password: '1234',
+    googleId: '',
+    name: 'Yuya',
+    isAdmin: false,
+  },
 ];
 
 const placeData = [
   {
     name: 'Fullstack Academy',
-    address: '5 Hanover Square',
+    address: '5 Hanover Square, 25th Floor',
     latitude: 40.705450817990055,
     longitude: -74.00917347517144,
+    singleStall: 'No',
+    autoFush: 'No',
+    genderNeutral: 'Yes',
+    hasLedge: 'No',
+    isFree: 'No',
+    cleanliness: 'Good',
+  },
+  {
+    name: 'Newport Mall',
+    address: '5 Hanover Square',
+    latitude: 40.727019,
+    longitude: -74.037536,
+    singleStall: 'No',
+    autoFush: 'Yes',
+    genderNeutral: 'Yes',
+    hasLedge: 'No',
+    isFree: 'Yes',
+    cleanliness: 'Okay',
+  },
+];
+
+const commentData = [
+  {
+    title: 'I like this bathroom',
+    body: 'I went here on 2019/05/03 and it was clean',
+    placeId: 1,
+  },
+  {
+    title: 'I hate this bathroom',
+    body: 'The toilet always autoflushes on me',
+    placeId: 2,
+    userId: 1,
   },
 ];
 
@@ -34,8 +82,13 @@ async function seed() {
     await db.models.place.create(placeData[i]);
   }
 
+  for (let i = 0; i < commentData.length; i++) {
+    await db.models.comment.create(commentData[i]);
+  }
+
   console.log(`seeded ${usersData.length} users`);
-  console.log(`seeded ${placeData.length} users`);
+  console.log(`seeded ${placeData.length} places`);
+  console.log(`seeded ${commentData.length} comments`);
   console.log(`seeded successfully`);
 }
 
