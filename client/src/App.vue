@@ -1,11 +1,10 @@
 <template>
   <div id="app">
-    <p>
+    <nav>
       <router-link to="/register">register</router-link>
-    </p>
+    </nav>
     <img alt="Vue logo" src="./assets/logo.png">
     <router-view/>
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   </div>
 </template>
 
