@@ -13,18 +13,29 @@ const usersData = [
   },
 ];
 
+const placeData = [
+  {
+    name: 'Fullstack Academy',
+    address: '5 Hanover Square',
+    latitude: 40.705450817990055,
+    longitude: -74.00917347517144,
+  },
+];
+
 async function seed() {
   await db.sync({ force: true });
   console.log('db synced!');
 
-  const users = [];
-
   for (let i = 0; i < usersData.length; i++) {
-    let user = await db.models.user.create(usersData[i]);
-    users.push(user);
+    await db.models.user.create(usersData[i]);
   }
 
-  console.log(`seeded ${users.length} users`);
+  for (let i = 0; i < placeData.length; i++) {
+    await db.models.place.create(placeData[i]);
+  }
+
+  console.log(`seeded ${usersData.length} users`);
+  console.log(`seeded ${placeData.length} users`);
   console.log(`seeded successfully`);
 }
 
