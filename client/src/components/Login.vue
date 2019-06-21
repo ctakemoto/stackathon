@@ -47,7 +47,7 @@ export default {
           email: this.email,
           password: this.password,
         });
-        console.log('response', response.data);
+
         this.$store.dispatch('setUser', response.data);
         this.$router.push('/');
       } catch (error) {

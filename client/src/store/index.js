@@ -8,6 +8,7 @@ export default new Vuex.Store({
   state: {
     user: null,
     isLoggedIn: false,
+    allBathrooms: [],
   },
   mutations: {
     setUser(state, user) {
@@ -18,6 +19,9 @@ export default new Vuex.Store({
       state.user = null;
       state.isLoggedIn = false;
     },
+    getAllBathrooms(state, bathrooms) {
+      state.allBathrooms = bathrooms;
+    },
   },
   actions: {
     setUser({ commit }, user) {
@@ -25,6 +29,9 @@ export default new Vuex.Store({
     },
     logout({ commit }) {
       commit('logout');
+    },
+    getAllBathrooms({ commit }, bathrooms) {
+      commit('getAllBathrooms', bathrooms);
     },
   },
 });

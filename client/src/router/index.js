@@ -4,6 +4,7 @@ import HelloWorld from '../components/HelloWorld';
 import Register from '../components/Register';
 import MapView from '../components/MapView';
 import Login from '../components/Login';
+import AllBathrooms from '../components/AllBathrooms';
 
 Vue.use(VueRouter);
 
@@ -28,6 +29,11 @@ export default new VueRouter({
       path: '/login',
       name: 'login',
       component: Login,
+    },
+    {
+      path: '/bathrooms',
+      name: 'bathrooms',
+      component: AllBathrooms,
     },
   ],
 });
