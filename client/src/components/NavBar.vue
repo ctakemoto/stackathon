@@ -6,13 +6,13 @@
         <b-nav-item to="/map">Map</b-nav-item>
       </b-navbar-nav>
 
-      <b-navbar-nav right>
+      <b-navbar-nav v-if="!$store.state.isLoggedIn">
         <b-nav-item to="/register">Sign Up</b-nav-item>
       </b-navbar-nav>
-      <b-navbar-nav right>
+      <b-navbar-nav v-if="!$store.state.isLoggedIn">
         <b-nav-item to="/login">Login</b-nav-item>
       </b-navbar-nav>
-      <b-nav-form right>
+      <b-nav-form v-if="$store.state.isLoggedIn">
         <b-button @click="logout">Logout</b-button>
       </b-nav-form>
     </b-navbar>

@@ -1,14 +1,14 @@
 <template>
-  <div id="mapid">{{mymap}}</div>
+  <div id="mapid"></div>
 </template>
 
 <script>
 export default {
   name: 'mapid',
-  data() {
-    // eslint-disable-next-line
-    // mymap: L.map('mapid').setView([51.505, -0.09], 13);
-  },
+  // data() {
+  //   // eslint-disable-next-line
+  //   // mymap: L.map('mapid').setView([51.505, -0.09], 13);
+  // },
 };
 </script>
 
