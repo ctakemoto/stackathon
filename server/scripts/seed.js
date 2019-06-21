@@ -89,7 +89,6 @@ async function seed() {
   console.log(`seeded ${usersData.length} users`);
   console.log(`seeded ${placeData.length} places`);
   console.log(`seeded ${commentData.length} comments`);
-  console.log(`seeded successfully`);
 }
 
 // We've separated the `seed` function from the `runSeed` function.
@@ -98,7 +97,8 @@ async function seed() {
 async function runSeed() {
   console.log('seeding...');
   try {
-    await seed(5, 5);
+    await seed();
+    console.log(`seeded successfully`);
   } catch (err) {
     console.error(err);
     process.exitCode = 1;

@@ -1,6 +1,6 @@
 // to connect to the backend api endpoints
 import axios from 'axios';
-console.log(process.env);
+
 export default () => {
   return axios.create({
     // environmental variables are defined in .env

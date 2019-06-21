@@ -2,6 +2,7 @@
   <div id="app">
     <nav>
       <router-link to="/register">register</router-link>
+      <router-link to="/map">map</router-link>
     </nav>
     <img alt="Vue logo" src="./assets/logo.png">
     <router-view/>
