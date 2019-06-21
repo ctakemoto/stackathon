@@ -21,7 +21,6 @@
           name="username"
           placeholder="username"
           v-model="username"
-          required
         ></b-form-input>
       </b-form-group>
       <b-form-group id="input-group-3" label="Name:" label-for="input-3">
@@ -70,14 +69,44 @@ export default {
   methods: {
     async register(e) {
       e.preventDefault();
-      const { data } = await AuthenticationService.register({
-        email: this.email,
-        password: this.password,
-        username: this.username,
-        name: this.name,
+      let responseStatus;
+      try {
+        let { data, status } = await AuthenticationService.register({
+          email: this.email,
+          password: this.password,
+          username: this.username,
+          name: this.name,
+        });
+        responseStatus = status;
+      } catch (error) {
+        console.dir(error);
+        responseStatus = error.response.status;
+      }
+      console.log('responseStatus', responseStatus);
+      // set toast based on status
+      let variant, message;
+      switch (responseStatus) {
+        case 200:
+          variant = 'success';
+          message = 'Registration successful';
+          break;
+        case 401:
+          variant = 'info';
+          message = 'You already have an account!';
+          break;
+        default:
+          variant = 'danger';
+          message = 'Unknown error';
+          break;
+      }
+
+      this.$bvToast.toast(message, {
+        variant,
+        solid: true,
       });
+
       // eslint-disable-next-line
-      console.log(data);
+      console.log(status);
     },
   },
   // mounted() {
