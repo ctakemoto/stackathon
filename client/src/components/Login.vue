@@ -42,27 +42,24 @@ export default {
   methods: {
     async login(e) {
       e.preventDefault();
-      // set toast based on status
-      let toastConfig;
       try {
-        let { data, status } = await AuthenticationService.login({
+        let response = await AuthenticationService.login({
           email: this.email,
           password: this.password,
         });
-        toastConfig = {
-          variant: 'success',
-          title: 'Success',
-          message: 'Login successful',
-        };
+        console.log('response', response.data);
+        this.$store.dispatch('setUser', response.data);
+        this.$router.push('/');
       } catch (error) {
+        s;
         console.dir(error);
-        toastConfig = {
+        let toastConfig = {
           variant: 'danger',
           title: 'Warning',
           message: error.response.data,
         };
+        this.$bvToast.toast(toastConfig.message, toastConfig);
       }
-      this.$bvToast.toast(toastConfig.message, toastConfig);
     },
   },
 };
