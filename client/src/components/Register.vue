@@ -82,7 +82,7 @@ export default {
         console.dir(error);
         responseStatus = error.response.status;
       }
-      console.log('responseStatus', responseStatus);
+
       // set toast based on status
       let variant, message;
       switch (responseStatus) {
@@ -114,4 +114,17 @@ export default {
   // },
 };
 </script>
-  <style scoped />;
+
+<style scoped>
+.register {
+  width: 80%;
+  min-width: 600px;
+  margin: 10px auto;
+}
+.register form {
+  text-align: left;
+  border: 1px solid #c2c2c2;
+  padding: 10px;
+  border-radius: 10px;
+}
+</style>;

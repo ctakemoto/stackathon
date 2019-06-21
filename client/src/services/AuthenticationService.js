@@ -6,10 +6,13 @@ export default {
     return Api().post('auth/signup', credentials);
   },
   login(email, password) {
-    return Api().post('/login', {
+    return Api().post('auth/login', {
       email,
       password,
     });
+  },
+  logout() {
+    return Api().post('auth/logout');
   },
 };
 

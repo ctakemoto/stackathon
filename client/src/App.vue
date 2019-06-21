@@ -1,22 +1,21 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/register">register</router-link>
-      <router-link to="/map">map</router-link>
-    </nav>
-    <img alt="Vue logo" src="./assets/logo.png">
+    <NavBar/>
     <router-view/>
+    <Footer/>
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue';
+import NavBar from './components/NavBar.vue';
+import Footer from './components/Footer.vue';
 
 export default {
   name: 'app',
-  // components: {
-  //   HelloWorld,
-  // },
+  components: {
+    NavBar,
+    Footer,
+  },
 };
 </script>
 
