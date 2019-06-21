@@ -5,11 +5,8 @@ export default {
     // axios does a post request to the register endpoint in our api
     return Api().post('auth/signup', credentials);
   },
-  login(email, password) {
-    return Api().post('auth/login', {
-      email,
-      password,
-    });
+  login(credentials) {
+    return Api().post('auth/login', credentials);
   },
   logout() {
     return Api().post('auth/logout');

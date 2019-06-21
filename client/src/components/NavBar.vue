@@ -9,6 +9,9 @@
       <b-navbar-nav right>
         <b-nav-item to="/register">Register</b-nav-item>
       </b-navbar-nav>
+      <b-navbar-nav right>
+        <b-nav-item to="/login">Login</b-nav-item>
+      </b-navbar-nav>
     </b-navbar>
   </div>
 </template>

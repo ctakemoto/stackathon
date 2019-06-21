@@ -1,5 +1,5 @@
 <template>
-  <footer id="footer-bottom"></footer>
+  <b-navbar id="footer-bottom" fixed="bottom"></b-navbar>
 </template>
 
 <script>
@@ -9,4 +9,8 @@ export default {
 </script>
 
 <style scoped>
+#footer-bottom {
+  height: 100px;
+  background-color: rgb(102, 161, 219);
+}
 </style>
