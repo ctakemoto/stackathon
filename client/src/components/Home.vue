@@ -1,82 +1,66 @@
 <template>
   <div class="home">
-    <h1>Hello</h1>
-    <b-alert
-      :show="posErr"
-      variant="danger"
-      dismissible
-    >Unable to get location, please enter address.</b-alert>
-    <MapView
-      v-if="!this.posErr&&this.posIsReady"
-      v-bind:mapCoords="this.$store.state.coords"
-      v-bind:includeArea="true"
-    />
-    <Loading v-if="!this.posErr&&!this.posIsReady"/>
+    <b-jumbotron fluid>
+      <mq-layout mq="mobile">
+        <img class="pic-background" src="../assets/mobile-banner.png" alt>
+      </mq-layout>
+      <mq-layout mq="tablet+">
+        <video
+          class="video-background"
+          src="../assets/NYC_OutOfFocusCarLightsLOOP_1664x936.mp4"
+          preload
+          autoplay
+          loop
+          muted
+        >
+          <!-- hero for those who cant see html5 -->
+        </video>
+      </mq-layout>
+
+      <template slot="header">Welcome to Toilt</template>
+      <template slot="lead">Are you completely pooped with no where to go? Well, no more!</template>
+    </b-jumbotron>
   </div>
 </template>
 
 <script>
-import MapView from './MapView';
-import Loading from './LoadingSpinner';
 export default {
   name: 'home',
-  components: {
-    MapView,
-    Loading,
-  },
   data() {
     return {
       posErr: false,
       posIsReady: false,
+      address: '',
     };
   },
-  methods: {
-    getUserLocation() {
-      let options = {
-        enableHighAccuracy: true,
-        timeout: 8000,
-        maximumAge: 0,
-      };
-      navigator.geolocation.getCurrentPosition(
-        pos => {
-          // if successful
-          console.log('pos', pos);
-          this.$store.dispatch('setCurrentLocation', [
-            pos.coords.latitude,
-            pos.coords.longitude,
-          ]);
-          this.posErr = false;
-          this.posIsReady = true;
-        },
-        err => {
-          // if unsuccessful
-          console.error(err);
-          this.posErr = true;
-        },
-        options
-      );
-    },
-  },
-  mounted() {
-    this.getUserLocation();
-  },
+  methods: {},
+  mounted() {},
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+.home {
+  width: 100vw;
+  height: 600px;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+.jumbotron {
+  position: relative;
+  z-index: -101;
+  color: white;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.521);
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+.video-background,
+.pic-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  z-index: -100;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 </style>

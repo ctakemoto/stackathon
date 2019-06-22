@@ -1,12 +1,12 @@
 <template>
-  <div class="allBathrooms">
+  <b-container class="allBathrooms">
     <h1>Explore {{numBathrooms}} Bathrooms</h1>
     <SingleBathroom
       v-bind:key="bathroom.id"
       v-for="bathroom in bathrooms"
       v-bind:bathroom="bathroom"
     />
-  </div>
+  </b-container>
 </template>
 
 <script>

@@ -5,6 +5,7 @@ import Register from '../components/Register';
 import Login from '../components/Login';
 import AllBathrooms from '../components/AllBathrooms';
 import Loading from '../components/LoadingSpinner';
+import UserMapDisplay from '../components/UserMapDisplay';
 
 Vue.use(VueRouter);
 
@@ -34,6 +35,11 @@ export default new VueRouter({
       path: '/loading',
       name: 'loading',
       component: Loading,
+    },
+    {
+      path: '/map',
+      name: 'map',
+      component: UserMapDisplay,
     },
   ],
 });

@@ -51,11 +51,11 @@ export default {
           }
         ).addTo(this.map);
 
-        // let markerIcon = this.createIcon();
+        let markerIcon = this.createIcon();
 
-        // this.marker = L.marker(this.mapCoords, {
-        //   icon: markerIcon,
-        // }).addTo(this.map);
+        L.marker(this.mapCoords, {
+          icon: markerIcon,
+        }).addTo(this.map);
 
         this.marker = L.circle(this.mapCoords, {
           color: '#222',
@@ -76,7 +76,7 @@ export default {
 
         this.mapErr = false;
       } catch (error) {
-        console.error(err);
+        console.error(error);
         this.mapErr = true;
       }
     },

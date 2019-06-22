@@ -1,27 +1,25 @@
 <template>
-  <div class="navbar">
-    <b-navbar toggleable="sm" type="dark" variant="info" fixed="top">
-      <b-navbar-brand to="/">Toilt</b-navbar-brand>
+  <b-navbar class="navbar" toggleable="sm" type="dark" variant="info" fixed="top">
+    <b-navbar-brand to="/">Toilt</b-navbar-brand>
 
-      <b-navbar-nav class="ml-auto" left>
-        <b-nav-item to="/map">Map</b-nav-item>
-        <b-nav-item to="/bathrooms">Explore</b-nav-item>
+    <b-navbar-nav class="ml-auto" left>
+      <b-nav-item to="/map">Map</b-nav-item>
+      <b-nav-item to="/bathrooms">Explore</b-nav-item>
+    </b-navbar-nav>
+
+    <b-navbar-toggle target="nav-collapse2"></b-navbar-toggle>
+
+    <b-collapse id="nav-collapse2" is-nav>
+      <!-- Right aligned nav items -->
+      <b-navbar-nav class="ml-auto">
+        <b-nav-item to="/register" v-if="!$store.state.isLoggedIn">Sign Up</b-nav-item>
+        <b-nav-item to="/login" v-if="!$store.state.isLoggedIn">Login</b-nav-item>
+        <b-nav-text v-if="$store.state.isLoggedIn">{{userGreeting}}</b-nav-text>
+        <b-nav-item v-if="$store.state.isLoggedIn" to="#">Profile</b-nav-item>
+        <b-nav-item v-if="$store.state.isLoggedIn" @click="logout">Logout</b-nav-item>
       </b-navbar-nav>
-
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-      <b-collapse id="nav-collapse" is-nav>
-        <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-auto">
-          <b-nav-item to="/register" v-if="!$store.state.isLoggedIn">Sign Up</b-nav-item>
-          <b-nav-item to="/login" v-if="!$store.state.isLoggedIn">Login</b-nav-item>
-          <b-nav-text v-if="$store.state.isLoggedIn">{{userGreeting}}</b-nav-text>
-          <b-nav-item v-if="$store.state.isLoggedIn" to="#">Profile</b-nav-item>
-          <b-nav-item v-if="$store.state.isLoggedIn" @click="logout">Logout</b-nav-item>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
-  </div>
+    </b-collapse>
+  </b-navbar>
 </template>
 
 <script>
@@ -62,4 +60,7 @@ export default {
 </script>
 
 <style scoped>
+.navbar {
+  height: 56px;
+}
 </style>

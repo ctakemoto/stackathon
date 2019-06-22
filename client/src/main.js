@@ -11,6 +11,16 @@ import store from './store';
 
 import 'leaflet/dist/leaflet.css';
 
+import VueMq from 'vue-mq';
+
+Vue.use(VueMq, {
+  breakpoints: {
+    mobile: 450,
+    tablet: 900,
+    desktop: Infinity,
+  },
+});
+
 Vue.config.productionTip = false;
 
 Vue.use(BootstrapVue);
