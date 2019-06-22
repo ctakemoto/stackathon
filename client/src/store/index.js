@@ -24,7 +24,6 @@ export default new Vuex.Store({
       state.allBathrooms = bathrooms;
     },
     setCurrentLocation(state, coords) {
-      console.log('setting coords on state', coords);
       state.coords = coords;
     },
   },

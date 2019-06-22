@@ -4,6 +4,7 @@ import Home from '../components/Home';
 import Register from '../components/Register';
 import Login from '../components/Login';
 import AllBathrooms from '../components/AllBathrooms';
+import Loading from '../components/LoadingSpinner';
 
 Vue.use(VueRouter);
 
@@ -28,6 +29,11 @@ export default new VueRouter({
       path: '/bathrooms',
       name: 'bathrooms',
       component: AllBathrooms,
+    },
+    {
+      path: '/loading',
+      name: 'loading',
+      component: Loading,
     },
   ],
 });

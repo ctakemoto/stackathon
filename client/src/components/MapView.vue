@@ -1,16 +1,15 @@
 <template>
   <div class="mapid">
     <div id="map-view" v-if="!this.mapErr">
-      <div class="text-center">
-        <b-spinner label="Spinning"></b-spinner>
-      </div>
+      <Loading/>
     </div>
-    <b-alert show="this.mapErr" variant="danger" dismissible>Error in displaying map!</b-alert>
+    <b-alert :show="mapErr" variant="danger" dismissible>Error in displaying map!</b-alert>
   </div>
 </template>
 
 <script>
 import L from 'leaflet';
+import Loading from './LoadingSpinner';
 export default {
   name: 'mapid',
   data() {
@@ -20,6 +19,9 @@ export default {
       tileLayer: null, //actual map visuals
       mapErr: false,
     };
+  },
+  components: {
+    Loading,
   },
   props: {
     mapCoords: {

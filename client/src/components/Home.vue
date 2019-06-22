@@ -2,20 +2,23 @@
   <div class="home">
     <h1>Hello</h1>
     <b-alert
-      show="this.posErr"
+      :show="posErr"
       variant="danger"
       dismissible
     >Unable to get location, please enter address.</b-alert>
     <MapView v-if="!this.posErr&&this.posIsReady" v-bind:mapCoords="this.$store.state.coords"/>
+    <Loading v-if="!this.posErr&&!this.posIsReady"/>
   </div>
 </template>
 
 <script>
 import MapView from './MapView';
+import Loading from './LoadingSpinner';
 export default {
   name: 'home',
   components: {
     MapView,
+    Loading,
   },
   data() {
     return {
