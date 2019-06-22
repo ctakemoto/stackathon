@@ -11,4 +11,13 @@ export default {
   addPlace(placeDetails) {
     return Api().post('api/places', placeDetails);
   },
+  getCoordsFromAddress(address) {
+    return Api().get('/api/places/geocode', address);
+  },
+  getAddressFromCoords(lat, long) {
+    return Api().get('api/places/reverse-geocode', {
+      lat,
+      long,
+    });
+  },
 };

@@ -1,11 +1,69 @@
 const router = require('express').Router();
 const db = require('../db');
+const geo = require('mapbox-geocoding');
+geo.setAccessToken(process.env.MAPBOX_ACCESS_TOKEN);
+
+const mapboxCache = require('./cache/mapboxCache');
 module.exports = router;
 
 router.get('/', async (req, res, next) => {
   try {
     const places = await db.models.place.findAll();
     res.json(places);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/geocode', async (req, res, next) => {
+  try {
+    let query = req.body.address.toLowerCase();
+    // check if request has been made, if so then just return that result
+    if (!mapboxCache.geocode[query]) {
+      await geo.geocode('mapbox.places', req.body.address, function(
+        err,
+        geoData
+      ) {
+        if (err) {
+          res.status(401).send('Error looking up address');
+        }
+        mapboxCache.geocode[query] = {
+          placeName: geoData.features[0].place_name,
+          coords: geoData.features[0].center,
+        };
+        res.json(mapboxCache.geocode[query]);
+      });
+    } else {
+      res.json(mapboxCache.geocode[query]);
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/reverse-geocode', async (req, res, next) => {
+  try {
+    let query = [req.body.lat, req.body.long].join(',');
+    // check if request has been made, if so then just return that result
+    if (!mapboxCache.reverseGeocode[query]) {
+      await geo.reverseGeocode(
+        'mapbox.places',
+        req.body.lat,
+        req.body.long,
+        function(err, geoData) {
+          if (err) {
+            res.status(401).send('Error looking up coords');
+          }
+
+          mapboxCache.reverseGeocode[query] = {
+            address: geoData.features[0].place_name,
+          };
+          res.json(mapboxCache.reverseGeocode[query]);
+        }
+      );
+    } else {
+      res.json(mapboxCache.reverseGeocode[query]);
+    }
   } catch (err) {
     next(err);
   }

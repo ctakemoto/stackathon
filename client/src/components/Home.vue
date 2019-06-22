@@ -6,7 +6,11 @@
       variant="danger"
       dismissible
     >Unable to get location, please enter address.</b-alert>
-    <MapView v-if="!this.posErr&&this.posIsReady" v-bind:mapCoords="this.$store.state.coords"/>
+    <MapView
+      v-if="!this.posErr&&this.posIsReady"
+      v-bind:mapCoords="this.$store.state.coords"
+      v-bind:includeArea="true"
+    />
     <Loading v-if="!this.posErr&&!this.posIsReady"/>
   </div>
 </template>
