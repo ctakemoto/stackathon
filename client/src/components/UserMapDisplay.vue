@@ -7,6 +7,7 @@
       v-if="!this.posErr&&this.posIsReady"
       v-bind:mapCoords="this.$store.state.coords"
       v-bind:includeArea="true"
+      v-bind:mapHeight="'400px'"
     />
     <Loading v-if="!this.posErr&&!this.posIsReady"/>
     <b-alert

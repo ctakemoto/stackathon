@@ -6,6 +6,7 @@ import Login from '../components/Login';
 import AllBathrooms from '../components/AllBathrooms';
 import Loading from '../components/LoadingSpinner';
 import UserMapDisplay from '../components/UserMapDisplay';
+import BathroomDetail from '../components/BathroomDetail';
 
 Vue.use(VueRouter);
 
@@ -30,6 +31,11 @@ export default new VueRouter({
       path: '/bathrooms',
       name: 'bathrooms',
       component: AllBathrooms,
+    },
+    {
+      path: '/bathrooms/:id',
+      name: 'bathroom-detail',
+      component: BathroomDetail,
     },
     {
       path: '/loading',

@@ -9,6 +9,7 @@ export default new Vuex.Store({
     user: null,
     isLoggedIn: false,
     allBathrooms: [],
+    selectedBathroom: {},
     coords: [40.705450817990055, -74.00917347517144],
   },
   mutations: {
@@ -20,8 +21,11 @@ export default new Vuex.Store({
       state.user = null;
       state.isLoggedIn = false;
     },
-    getAllBathrooms(state, bathrooms) {
+    setAllBathrooms(state, bathrooms) {
       state.allBathrooms = bathrooms;
+    },
+    setBathroom(state, bathroom) {
+      state.selectedBathroom = bathroom;
     },
     setCurrentLocation(state, coords) {
       state.coords = coords;
@@ -34,8 +38,11 @@ export default new Vuex.Store({
     logout({ commit }) {
       commit('logout');
     },
-    getAllBathrooms({ commit }, bathrooms) {
-      commit('getAllBathrooms', bathrooms);
+    setAllBathrooms({ commit }, bathrooms) {
+      commit('setAllBathrooms', bathrooms);
+    },
+    setBathroom({ commit }, bathroom) {
+      commit('setBathroom', bathroom);
     },
     setCurrentLocation({ commit }, coords) {
       commit('setCurrentLocation', coords);

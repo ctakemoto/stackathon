@@ -1,6 +1,6 @@
 <template>
   <div class="mapid">
-    <div id="map-view" v-if="!this.mapErr">
+    <div id="map-view" v-if="!this.mapErr" :style="style">
       <Loading/>
     </div>
     <b-alert :show="mapErr" variant="danger" dismissible>Error in displaying map!</b-alert>
@@ -33,6 +33,19 @@ export default {
     includeArea: {
       type: Boolean,
       default: false,
+    },
+    areaRadius: {
+      type: Number,
+      default: 50,
+    },
+    mapHeight: {
+      type: String,
+      default: '300px',
+    },
+  },
+  computed: {
+    style() {
+      return `height: ${this.mapHeight}`;
     },
   },
   methods: {
@@ -70,7 +83,7 @@ export default {
             color: '#222',
             fillColor: '#222',
             fillOpacity: 0.3,
-            radius: 50,
+            radius: this.areaRadius,
           }).addTo(this.map);
         }
 
@@ -100,7 +113,4 @@ export default {
 </script>
 
 <style scoped>
-#map-view {
-  height: 300px;
-}
 </style>
