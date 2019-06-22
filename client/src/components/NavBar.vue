@@ -1,8 +1,9 @@
 <template>
   <div class="navbar">
-    <b-navbar toggleable="lg" type="dark" variant="info" fixed="top">
+    <b-navbar toggleable="sm" type="dark" variant="info" fixed="top">
       <b-navbar-brand to="/">Toilt</b-navbar-brand>
-      <b-navbar-nav class="ml-auto">
+
+      <b-navbar-nav class="ml-auto" left>
         <b-nav-item to="/map">Map</b-nav-item>
         <b-nav-item to="/bathrooms">Explore</b-nav-item>
       </b-navbar-nav>

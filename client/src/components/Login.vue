@@ -68,7 +68,6 @@ export default {
 <style scoped>
 .login {
   width: 80%;
-  min-width: 600px;
   margin: 10px auto;
 }
 .login form {

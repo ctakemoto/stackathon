@@ -9,6 +9,8 @@ import router from './router';
 import { sync } from 'vuex-router-sync';
 import store from './store';
 
+import 'leaflet/dist/leaflet.css';
+
 Vue.config.productionTip = false;
 
 Vue.use(BootstrapVue);
