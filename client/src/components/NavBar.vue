@@ -1,16 +1,15 @@
 <template>
-  <b-navbar class="navbar" toggleable="sm" type="dark" variant="info" fixed="top">
+  <b-navbar class="navbar" toggleable="sm" type="dark" fixed="top">
     <b-navbar-brand to="/">Toilt</b-navbar-brand>
-
-    <b-navbar-nav class="ml-auto" left>
-      <b-nav-item to="/map">Map</b-nav-item>
-      <b-nav-item to="/bathrooms">Explore</b-nav-item>
-      <b-nav-item to="/add">Contribute</b-nav-item>
-    </b-navbar-nav>
 
     <b-navbar-toggle target="nav-collapse2"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse2" is-nav>
+      <b-navbar-nav>
+        <b-nav-item to="/map">Map</b-nav-item>
+        <b-nav-item to="/bathrooms">Explore</b-nav-item>
+        <b-nav-item to="/add">Contribute</b-nav-item>
+      </b-navbar-nav>
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <b-nav-item to="/register" v-if="!$store.state.isLoggedIn">Sign Up</b-nav-item>
@@ -63,5 +62,14 @@ export default {
 <style scoped>
 .navbar {
   height: 56px;
+}
+
+.navbar,
+.navbar-collapse.collapse {
+  background-color: #222;
+}
+.navbar-collapse.collapse.show {
+  text-align: right;
+  padding-right: 10px;
 }
 </style>

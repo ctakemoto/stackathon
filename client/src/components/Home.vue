@@ -18,7 +18,7 @@
       </mq-layout>
 
       <template slot="header">Welcome to Toilt</template>
-      <template slot="lead">Are you completely pooped with no where to go? Well, no more!</template>
+      <template slot="lead">Find where to go when on the go.</template>
     </b-jumbotron>
   </div>
 </template>

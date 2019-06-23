@@ -68,8 +68,6 @@ export default {
     async setLocation(e) {
       e.preventDefault();
       const { data } = await PlacesService.getCoordsFromAddress(this.address);
-      console.log('data', data.coords);
-      console.log('place:', data.placeName);
       this.$store.dispatch('setCurrentLocation', data.coords);
     },
   },

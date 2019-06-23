@@ -48,7 +48,7 @@ export default {
     return {
       isLoading: true,
       currentPage: 1,
-      perPage: 9,
+      perPage: 6,
     };
   },
   computed: {
