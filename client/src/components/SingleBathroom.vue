@@ -1,10 +1,10 @@
 <template>
-  <div class="bathroom">
-    <b-card class="text-center mb-2" :title="bathroom.name" tag="article">
+  <b-container class="bathroom">
+    <b-card class="text-center mb-2 single-bathroom" :title="bathroom.name" tag="article">
       <b-card-text>{{bathroom.address}}</b-card-text>
       <b-button :to="{ name: 'bathroom-detail', params: { id: bathroom.id }}">More Info</b-button>
     </b-card>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -15,8 +15,8 @@ export default {
 </script>
 
 <style scoped>
-.bathroom b-card {
-  max-width: 20rem;
+.single-bathroom {
+  max-width: 400px;
   margin: 10px;
 }
 </style>

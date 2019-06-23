@@ -12,12 +12,14 @@ export default {
     return Api().post('api/places', placeDetails);
   },
   getCoordsFromAddress(address) {
-    return Api().get('/api/places/geocode', address);
+    return Api().post('/api/places/geocode', {
+      address: address,
+    });
   },
-  getAddressFromCoords(lat, long) {
-    return Api().get('api/places/reverse-geocode', {
-      lat,
-      long,
+  getAddressFromCoords(latitude, longitude) {
+    return Api().post('api/places/reverse-geocode', {
+      latitude,
+      longitude,
     });
   },
 };

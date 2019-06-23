@@ -1,6 +1,7 @@
 'use strict';
 
 const db = require('../src/db');
+const { data } = require('../src/data/DirectoryOfToiletsInPublicParks.json');
 
 const usersData = [
   {
@@ -31,7 +32,7 @@ const usersData = [
 
 const placeData = [
   {
-    name: 'Fullstack Academy',
+    name: 'Fullstack Academy - Grace Hopper Program',
     address: '5 Hanover Square, 25th Floor',
     latitude: 40.705450817990055,
     longitude: -74.00917347517144,
@@ -41,18 +42,7 @@ const placeData = [
     hasLedge: 'No',
     isFree: 'No',
     cleanliness: 'Good',
-  },
-  {
-    name: 'Newport Mall',
-    address: '5 Hanover Square',
-    latitude: 40.727019,
-    longitude: -74.037536,
-    singleStall: 'No',
-    autoFush: 'Yes',
-    genderNeutral: 'Yes',
-    hasLedge: 'No',
-    isFree: 'Yes',
-    cleanliness: 'Okay',
+    borough: 'Manhattan',
   },
 ];
 
@@ -73,6 +63,17 @@ const commentData = [
 async function seed() {
   await db.sync({ force: true });
   console.log('db synced!');
+
+  for (let i = 0; i < data.length; i++) {
+    await db.models.place.create({
+      name: data[i][8],
+      address: data[i][9],
+      openYearRound: data[i][10],
+      handicapAccessible: data[i][11],
+      borough: data[i][12],
+      description: data[i][13],
+    });
+  }
 
   for (let i = 0; i < usersData.length; i++) {
     await db.models.user.create(usersData[i]);

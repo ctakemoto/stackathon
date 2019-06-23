@@ -1,10 +1,10 @@
 <template>
   <b-container class="bathroom-detail">
-    <Loading v-if="isLoading"/>
+    <Loading v-if="isLoading&&!mapErr"/>
     <div v-if="!isLoading">
       <h1>{{this.bathroom.name}}</h1>
       <MapView
-        v-if="!isLoading"
+        v-if="!isLoading&&!mapErr"
         v-bind:mapCoords="this.bathroom.coordinates"
         v-bind:mapHeight="'400px'"
       />
@@ -23,6 +23,7 @@ export default {
     return {
       isLoading: true,
       bathroom: null,
+      mapErr: false,
     };
   },
   components: {
@@ -33,7 +34,7 @@ export default {
     // retrieve data for specific bathroom
     try {
       const { data } = await PlacesServices.getPlace(this.$route.params.id);
-      this.$store.dispatch('setBathroom', data);
+
       this.bathroom = data;
 
       if (
@@ -42,28 +43,31 @@ export default {
         this.bathroom.longitude
       ) {
         // if it has coords but no address, go fetch address
-        this.bathroom.address = await PlacesServices.getAddressFromCoords(
+        const addressResponse = await PlacesServices.getAddressFromCoords(
           this.bathroom.latitude,
           this.bathroom.longitude
         );
+        this.bathroom.address = addressResponse.data.address;
       }
       if (
         (!this.bathroom.latitude || !this.bathroom.longitude) &&
         this.bathroom.address
       ) {
-        this.bathroom.coordinates = await PlacesServices.getCoordsFromAddress(
+        const coordsResponse = await PlacesServices.getCoordsFromAddress(
           this.bathroom.address
         );
+        this.bathroom.coordinates = coordsResponse.data.coords;
       }
-
-      this.isLoading = false;
+      this.$store.dispatch('setBathroom', this.bathroom);
     } catch (error) {
       console.error(error);
-      this.$bvToast.toast('Error retrieving data', {
+      this.$bvToast.toast(error.response.data, {
         variant: 'danger',
-        title: 'Oh no!',
+        title: 'Error finding Coordinates',
       });
+      this.mapErr = true;
     }
+    this.isLoading = false;
   },
 };
 </script>
