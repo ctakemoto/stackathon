@@ -24,7 +24,6 @@ export default {
   },
   watch: {
     mapCoords: function(val) {
-      console.log(val);
       this.mapErr = false;
       try {
         this.map.flyTo(val, this.zoom);

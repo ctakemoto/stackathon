@@ -35,6 +35,7 @@ export default new Vuex.Store({
       state.allBathrooms = [...state.allBathrooms, bathroom];
     },
     addComment(state, comment) {
+      comment.user = state.user;
       state.selectedBathroom.comments = [
         ...state.selectedBathroom.comments,
         comment,

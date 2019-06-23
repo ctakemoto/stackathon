@@ -1,34 +1,36 @@
 <template>
-  <div class="add-comment">
-    <h3>Add a Review</h3>
+  <b-container class="add-comment">
+    <div v-if="showCommentForm">
+      <h3>Add a Review</h3>
+      <b-form>
+        <b-form-group id="input-group-1" label="Subject:" label-for="input-1">
+          <b-form-input
+            id="input-1"
+            type="text"
+            name="subject"
+            placeholder="subject"
+            v-model="subject"
+            required
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group id="input-group-2" label="Comment:" label-for="input-2">
+          <b-form-textarea
+            id="input-2"
+            type="text"
+            name="text"
+            placeholder="What do you think about this location?"
+            v-model="text"
+            rows="3"
+            max-rows="6"
+            required
+          ></b-form-textarea>
+        </b-form-group>
 
-    <b-form>
-      <b-form-group id="input-group-1" label="Subject:" label-for="input-1">
-        <b-form-input
-          id="input-1"
-          type="text"
-          name="subject"
-          placeholder="subject"
-          v-model="subject"
-          required
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group id="input-group-2" label="Comment:" label-for="input-2">
-        <b-form-textarea
-          id="input-2"
-          type="text"
-          name="text"
-          placeholder="What do you think about this location?"
-          v-model="text"
-          rows="3"
-          max-rows="6"
-          required
-        ></b-form-textarea>
-      </b-form-group>
-
-      <b-button @click.prevent="addComment">Submit</b-button>
-    </b-form>
-  </div>
+        <b-button @click.prevent="addComment">Submit</b-button>
+      </b-form>
+    </div>
+    <b-button v-else @click="showCommentForm = !showCommentForm">Add a Comment</b-button>
+  </b-container>
 </template>
 
 <script>
@@ -39,7 +41,13 @@ export default {
     return {
       subject: '',
       text: '',
+      showCommentForm: false,
     };
+  },
+  watch: {
+    showCommentForm: function(val) {
+      console.log('showCommentForm', val);
+    },
   },
   props: {
     bathroomId: {
@@ -58,6 +66,11 @@ export default {
         });
 
         this.$store.dispatch('addComment', data);
+        // hide form
+        this.showCommentForm = false;
+        // clear the form
+        this.subject = '';
+        this.text = '';
       } catch (error) {
         console.error(error);
         let toastConfig = {

@@ -14,10 +14,11 @@
           v-bind:key="comment.id"
           v-for="comment in this.bathroom.comments"
           :title="comment.title"
+          :sub-title="comment.userId ? comment.user.username : 'Guest'"
+          class="comment-card"
         >{{comment.body}}</b-card>
       </b-container>
-      <AddComment v-if="showCommentForm" v-bind:bathroomId="bathroom.id"/>
-      <b-button v-else @click="showCommentForm = !showCommentForm">Add a Comment</b-button>
+      <AddComment v-bind:bathroomId="bathroom.id"/>
     </div>
   </b-container>
 </template>
@@ -33,10 +34,18 @@ export default {
   data() {
     return {
       isLoading: true,
-      bathroom: null,
       mapErr: false,
-      showCommentForm: false,
     };
+  },
+  computed: {
+    bathroom() {
+      return this.$store.state.selectedBathroom;
+    },
+  },
+  watch: {
+    bathroom: function(val) {
+      console.dir(val);
+    },
   },
   methods: {
     async getPlace() {
@@ -44,30 +53,24 @@ export default {
       try {
         const { data } = await PlacesServices.getPlace(this.$route.params.id);
 
-        this.bathroom = data;
+        let bathroom = data;
 
-        if (
-          !this.bathroom.address &&
-          this.bathroom.latitude &&
-          this.bathroom.longitude
-        ) {
+        if (!bathroom.address && bathroom.latitude && bathroom.longitude) {
           // if it has coords but no address, go fetch address
           const addressResponse = await PlacesServices.getAddressFromCoords(
-            this.bathroom.latitude,
-            this.bathroom.longitude
+            bathroom.latitude,
+            bathroom.longitude
           );
-          this.bathroom.address = addressResponse.data.address;
+          bathroom.address = addressResponse.data.address;
         }
-        if (
-          (!this.bathroom.latitude || !this.bathroom.longitude) &&
-          this.bathroom.address
-        ) {
+        if ((!bathroom.latitude || !bathroom.longitude) && bathroom.address) {
           const coordsResponse = await PlacesServices.getCoordsFromAddress(
-            this.bathroom.address
+            bathroom.address
           );
-          this.bathroom.coordinates = coordsResponse.data.coords;
+          bathroom.coordinates = coordsResponse.data.coords;
         }
-        this.$store.dispatch('setBathroom', this.bathroom);
+        this.$store.dispatch('setBathroom', bathroom);
+        console.log('bathroom', bathroom);
       } catch (error) {
         console.error(error);
         this.$bvToast.toast(error.response.data, {
@@ -91,4 +94,7 @@ export default {
 </script>
 
 <style scoped>
+.comment-card {
+  margin: 10px;
+}
 </style>

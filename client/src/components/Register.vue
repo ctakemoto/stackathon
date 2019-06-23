@@ -21,17 +21,11 @@
           name="username"
           placeholder="username"
           v-model="username"
+          required
         ></b-form-input>
       </b-form-group>
       <b-form-group id="input-group-3" label="Name:" label-for="input-3">
-        <b-form-input
-          id="input-3"
-          type="text"
-          name="name"
-          placeholder="name"
-          v-model="name"
-          required
-        ></b-form-input>
+        <b-form-input id="input-3" type="text" name="name" placeholder="name" v-model="name"></b-form-input>
       </b-form-group>
       <b-form-group id="input-group-4" label="Password:" label-for="input-4">
         <b-form-input
@@ -85,6 +79,7 @@ export default {
           title: 'Success',
           message: 'Registration successful',
         };
+        this.$route.push('/login');
       } catch (error) {
         console.dir(error);
         toastConfig = {
