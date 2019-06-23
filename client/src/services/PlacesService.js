@@ -22,4 +22,7 @@ export default {
       longitude,
     });
   },
+  addComment(comment) {
+    return Api().post(`api/comments/${comment.placeId}`, comment);
+  },
 };

@@ -8,7 +8,15 @@
         v-bind:mapCoords="this.bathroom.coordinates"
         v-bind:mapHeight="'400px'"
       />
-      <AddComment v-if="showCommentForm"/>
+      <b-container>
+        <h3>Comments</h3>
+        <b-card
+          v-bind:key="comment.id"
+          v-for="comment in this.bathroom.comments"
+          :title="comment.title"
+        >{{comment.body}}</b-card>
+      </b-container>
+      <AddComment v-if="showCommentForm" v-bind:bathroomId="bathroom.id"/>
       <b-button v-else @click="showCommentForm = !showCommentForm">Add a Comment</b-button>
     </div>
   </b-container>

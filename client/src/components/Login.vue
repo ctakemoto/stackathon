@@ -54,7 +54,7 @@ export default {
         console.error(error);
         let toastConfig = {
           variant: 'danger',
-          title: 'Warning',
+          title: 'Error logging in',
           message: error.response.data,
         };
         this.$bvToast.toast(toastConfig.message, toastConfig);

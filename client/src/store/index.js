@@ -7,7 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   strict: true, //makes immutable
   state: {
-    user: null,
+    user: {},
     isLoggedIn: false,
     allBathrooms: [],
     selectedBathroom: {},
@@ -34,6 +34,12 @@ export default new Vuex.Store({
     addBathroom(state, bathroom) {
       state.allBathrooms = [...state.allBathrooms, bathroom];
     },
+    addComment(state, comment) {
+      state.selectedBathroom.comments = [
+        ...state.selectedBathroom.comments,
+        comment,
+      ];
+    },
   },
   actions: {
     setUser({ commit }, user) {
@@ -53,6 +59,9 @@ export default new Vuex.Store({
     },
     addBathroom({ commit }, bathroom) {
       commit('addBathroom', bathroom);
+    },
+    addComment({ commit }, comment) {
+      commit('addComment', comment);
     },
   },
 });
