@@ -51,7 +51,6 @@ export default {
         this.$store.dispatch('setUser', response.data);
         this.$router.push('/');
       } catch (error) {
-        s;
         console.error(error);
         let toastConfig = {
           variant: 'danger',
