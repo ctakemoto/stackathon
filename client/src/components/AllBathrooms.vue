@@ -1,13 +1,23 @@
 <template>
   <b-container class="allBathrooms">
     <Loading v-if="isLoading"/>
-    <div v-if="!isLoading">
+    <div class="overflow-auto" v-else>
       <h1>Explore {{numBathrooms}} Bathrooms</h1>
-      <SingleBathroom
-        v-bind:key="bathroom.id"
-        v-for="bathroom in bathrooms"
-        v-bind:bathroom="bathroom"
-      />
+      <div id="bathroom-container">
+        <SingleBathroom
+          v-bind:key="bathroom.id"
+          v-for="bathroom in bathrooms"
+          v-bind:bathroom="bathroom"
+          class="single-bathroom"
+        />
+      </div>
+      <b-pagination
+        v-model="currentPage"
+        :total-rows="numBathrooms"
+        :per-page="perPage"
+        aria-controls="single-bathroom"
+        align="center"
+      ></b-pagination>
     </div>
   </b-container>
 </template>
@@ -37,11 +47,18 @@ export default {
   data() {
     return {
       isLoading: true,
+      currentPage: 1,
+      perPage: 9,
     };
   },
   computed: {
     bathrooms() {
-      return this.$store.state.allBathrooms;
+      const items = this.$store.state.allBathrooms;
+      // Return just page of items needed
+      return items.slice(
+        (this.currentPage - 1) * this.perPage,
+        this.currentPage * this.perPage
+      );
     },
     numBathrooms() {
       return this.$store.state.allBathrooms.length;
@@ -59,4 +76,10 @@ export default {
 </script>
 
 <style scoped>
+#bathroom-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
 </style>

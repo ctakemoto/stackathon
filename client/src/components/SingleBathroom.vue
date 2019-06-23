@@ -16,7 +16,8 @@ export default {
 
 <style scoped>
 .single-bathroom {
-  max-width: 400px;
-  margin: 10px;
+  max-width: 350px;
+  margin: 10px 0;
+  height: 300px;
 }
 </style>
