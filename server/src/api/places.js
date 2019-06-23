@@ -17,7 +17,6 @@ router.get('/', async (req, res, next) => {
 
 router.post('/geocode', async (req, res, next) => {
   try {
-    console.log('req.body', req.body);
     let query = req.body.address.toLowerCase();
     // check if request has been made, if so then just return that result
     if (!mapboxCache.geocode[query]) {
@@ -26,8 +25,6 @@ router.post('/geocode', async (req, res, next) => {
         geoData
       ) {
         if (err) {
-          console.log('err', err);
-          console.log('geoData', geoData);
           res.status(401).send(err.message);
         } else {
           mapboxCache.geocode[query] = {

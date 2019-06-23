@@ -2,7 +2,12 @@
   <b-container class="user-map">
     <h1>Find Bathrooms Near You</h1>
 
-    <b-form-input v-model="address" placeholder="Enter an address" trim></b-form-input>
+    <b-input-group>
+      <b-form-input v-model="address" placeholder="Enter an address" v-on:submit="setLocation" trim></b-form-input>
+      <b-input-group-append>
+        <b-button variant="outline-success" v-on:click="setLocation">GO</b-button>
+      </b-input-group-append>
+    </b-input-group>
     <MapView
       v-if="!this.posErr&&this.posIsReady"
       v-bind:mapCoords="this.$store.state.coords"
@@ -21,6 +26,7 @@
 <script>
 import MapView from './MapView';
 import Loading from './LoadingSpinner';
+import PlacesService from '../services/PlacesService';
 export default {
   name: 'user-map',
   components: {
@@ -58,6 +64,13 @@ export default {
         },
         options
       );
+    },
+    async setLocation(e) {
+      e.preventDefault();
+      const { data } = await PlacesService.getCoordsFromAddress(this.address);
+      console.log('data', data.coords);
+      console.log('place:', data.placeName);
+      this.$store.dispatch('setCurrentLocation', data.coords);
     },
   },
   mounted() {

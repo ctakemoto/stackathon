@@ -22,6 +22,11 @@ export default {
       area: null,
     };
   },
+  watch: {
+    mapCoords: function(val) {
+      this.map.flyTo(val, this.zoom);
+    },
+  },
   components: {
     Loading,
   },
