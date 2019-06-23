@@ -1,7 +1,7 @@
 <template>
   <div class="addBathroom">
     <h1>Add a Place</h1>
-    <b-form @submit="addPlace">
+    <b-form>
       <b-form-group id="input-group-1" label="Name:" label-for="input-1">
         <b-form-input
           id="input-1"
@@ -108,7 +108,7 @@
           required
         ></b-form-select>
       </b-form-group>
-      <b-button type="submit">Submit</b-button>
+      <b-button @click.prevent="addPlace">Submit</b-button>
     </b-form>
   </div>
 </template>

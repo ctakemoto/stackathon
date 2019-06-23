@@ -2,7 +2,7 @@
   <div class="login">
     <h1>Login</h1>
 
-    <b-form @submit="login">
+    <b-form>
       <b-form-group id="input-group-1" label="Email Address:" label-for="input-1">
         <b-form-input
           id="input-1"
@@ -24,7 +24,7 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-button type="submit">Login</b-button>
+      <b-button @click.prevent="login">Login</b-button>
     </b-form>
   </div>
 </template>
