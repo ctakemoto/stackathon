@@ -5,6 +5,7 @@
     <b-navbar-nav class="ml-auto" left>
       <b-nav-item to="/map">Map</b-nav-item>
       <b-nav-item to="/bathrooms">Explore</b-nav-item>
+      <b-nav-item to="/add">Contribute</b-nav-item>
     </b-navbar-nav>
 
     <b-navbar-toggle target="nav-collapse2"></b-navbar-toggle>

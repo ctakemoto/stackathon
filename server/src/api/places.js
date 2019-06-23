@@ -94,13 +94,18 @@ router.post('/', async (req, res, next) => {
   try {
     const place = await db.models.place.create({
       name: req.body.name,
+      description: req.body.description,
       address: req.body.address,
-      latitude: req.body.latitude,
-      longitude: req.body.longitude,
+      // latitude: req.body.latitude,
+      // longitude: req.body.longitude,
       singleStall: req.body.singleStall,
       hasLedge: req.body.hasLedge,
       isFree: req.body.isFree,
       cleanliness: req.body.cleanliness,
+      borough: req.body.borough,
+      handicapAccessible: req.body.handicapAccessible,
+      openYearRound: req.body.openYearRound,
+      genderNeutral: req.body.genderNeutral,
     });
     res.json(place);
   } catch (err) {

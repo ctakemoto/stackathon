@@ -7,6 +7,7 @@ import AllBathrooms from '../components/AllBathrooms';
 import Loading from '../components/LoadingSpinner';
 import UserMapDisplay from '../components/UserMapDisplay';
 import BathroomDetail from '../components/BathroomDetail';
+import AddBathroom from '../components/AddBathroom';
 
 Vue.use(VueRouter);
 
@@ -46,6 +47,11 @@ export default new VueRouter({
       path: '/map',
       name: 'map',
       component: UserMapDisplay,
+    },
+    {
+      path: '/add',
+      name: 'add-place',
+      component: AddBathroom,
     },
   ],
 });

@@ -52,7 +52,7 @@ export default {
         this.$router.push('/');
       } catch (error) {
         s;
-        console.dir(error);
+        console.error(error);
         let toastConfig = {
           variant: 'danger',
           title: 'Warning',

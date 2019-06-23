@@ -9,7 +9,7 @@ const Place = db.define('place', {
     },
   },
   desciption: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
   },
   address: {
     type: Sequelize.STRING,

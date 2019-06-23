@@ -31,6 +31,9 @@ export default new Vuex.Store({
     setCurrentLocation(state, coords) {
       state.coords = coords;
     },
+    addBathroom(state, bathroom) {
+      state.allBathrooms = [...state.allBathrooms, bathroom];
+    },
   },
   actions: {
     setUser({ commit }, user) {
@@ -47,6 +50,9 @@ export default new Vuex.Store({
     },
     setCurrentLocation({ commit }, coords) {
       commit('setCurrentLocation', coords);
+    },
+    addBathroom({ commit }, bathroom) {
+      commit('addBathroom', bathroom);
     },
   },
 });

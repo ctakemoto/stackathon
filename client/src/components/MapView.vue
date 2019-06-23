@@ -25,7 +25,13 @@ export default {
   watch: {
     mapCoords: function(val) {
       console.log(val);
-      this.map.flyTo(val, this.zoom);
+      this.mapErr = false;
+      try {
+        this.map.flyTo(val, this.zoom);
+      } catch (error) {
+        console.error(error);
+        this.mapErr = true;
+      }
     },
   },
   components: {
