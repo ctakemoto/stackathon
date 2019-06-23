@@ -27,6 +27,7 @@ export default {
       this.mapErr = false;
       try {
         this.map.flyTo(val, this.zoom);
+        this.addMarker(val);
       } catch (error) {
         console.error(error);
         this.mapErr = true;
@@ -75,33 +76,44 @@ export default {
           }
         ).addTo(this.map);
 
-        let markerIcon = this.createIcon();
-
-        L.marker(this.mapCoords, {
-          icon: markerIcon,
-        }).addTo(this.map);
-
-        this.marker = L.circle(this.mapCoords, {
-          color: '#222',
-          fillColor: '#222',
-          fillOpacity: 1,
-          radius: 1,
-        }).addTo(this.map);
-
-        if (this.includeArea) {
-          //  add area circle
-          this.area = L.circle(this.mapCoords, {
-            color: '#222',
-            fillColor: '#222',
-            fillOpacity: 0.3,
-            radius: this.areaRadius,
-          }).addTo(this.map);
-        }
+        this.addMarker(this.mapCoords);
 
         this.mapErr = false;
       } catch (error) {
         console.error(error);
         this.mapErr = true;
+      }
+    },
+    addMarker(coords) {
+      // let markerIcon = this.createIcon();
+
+      // L.marker(coords, {
+      //   icon: markerIcon,
+      // }).addTo(this.map);
+
+      // remove prior markers
+      if (this.marker) {
+        this.map.removeLayer(this.marker);
+      }
+      if (this.area) {
+        this.map.removeLayer(this.area);
+      }
+
+      this.marker = L.circle(coords, {
+        color: '#222',
+        fillColor: '#222',
+        fillOpacity: 1,
+        radius: 1,
+      }).addTo(this.map);
+
+      if (this.includeArea) {
+        //  add area circle
+        this.area = L.circle(coords, {
+          color: '#222',
+          fillColor: '#222',
+          fillOpacity: 0.3,
+          radius: this.areaRadius,
+        }).addTo(this.map);
       }
     },
     createIcon() {
