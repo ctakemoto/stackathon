@@ -8,7 +8,8 @@
         v-bind:mapCoords="this.bathroom.coordinates"
         v-bind:mapHeight="'400px'"
       />
-      <AddComment/>
+      <AddComment v-if="showCommentForm"/>
+      <b-button v-else @click="showCommentForm = !showCommentForm">Add a Comment</b-button>
     </div>
   </b-container>
 </template>
@@ -26,6 +27,7 @@ export default {
       isLoading: true,
       bathroom: null,
       mapErr: false,
+      showCommentForm: false,
     };
   },
   methods: {
