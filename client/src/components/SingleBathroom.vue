@@ -18,6 +18,6 @@ export default {
 .single-bathroom {
   max-width: 350px;
   margin: 10px 0;
-  height: 300px;
+  height: 250px;
 }
 </style>

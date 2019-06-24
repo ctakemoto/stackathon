@@ -14,8 +14,7 @@
       <b-navbar-nav class="ml-auto">
         <b-nav-item to="/register" v-if="!$store.state.isLoggedIn">Sign Up</b-nav-item>
         <b-nav-item to="/login" v-if="!$store.state.isLoggedIn">Login</b-nav-item>
-        <b-nav-text v-if="$store.state.isLoggedIn">{{userGreeting}}</b-nav-text>
-        <b-nav-item v-if="$store.state.isLoggedIn" to="#">Profile</b-nav-item>
+        <b-nav-item to="/profile" v-if="$store.state.isLoggedIn">{{userGreeting}}</b-nav-item>
         <b-nav-item v-if="$store.state.isLoggedIn" @click="logout">Logout</b-nav-item>
       </b-navbar-nav>
     </b-collapse>
@@ -69,7 +68,7 @@ export default {
   background-color: #222;
 }
 .navbar-collapse.collapse.show {
-  text-align: right;
+  text-align: center;
   padding-right: 10px;
 }
 </style>

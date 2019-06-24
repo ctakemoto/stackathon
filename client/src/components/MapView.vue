@@ -1,7 +1,7 @@
 <template>
   <div class="mapid">
     <div id="map-view" v-if="!this.mapErr" :style="style">
-      <Loading/>
+      <Loading v-if="isLoading"/>
     </div>
     <b-alert :show="mapErr" variant="danger" dismissible>Error in displaying map!</b-alert>
   </div>
@@ -20,6 +20,7 @@ export default {
       mapErr: false,
       marker: null,
       area: null,
+      isLoading: true,
     };
   },
   watch: {
@@ -64,7 +65,7 @@ export default {
     },
   },
   methods: {
-    initMap(maxZoom = 18) {
+    initMap(maxZoom = 20) {
       try {
         this.map = L.map('map-view').setView(this.mapCoords, this.zoom);
 
@@ -84,9 +85,11 @@ export default {
         this.map.on('click', this.onMapClick);
 
         this.mapErr = false;
+        this.isLoading = false;
       } catch (error) {
         console.error(error);
         this.mapErr = true;
+        this.isLoading = false;
       }
     },
     addMarker(coords) {

@@ -8,6 +8,7 @@ import Loading from '../components/LoadingSpinner';
 import UserMapDisplay from '../components/UserMapDisplay';
 import BathroomDetail from '../components/BathroomDetail';
 import AddBathroom from '../components/AddBathroom';
+import Profile from '../components/Profile'
 
 Vue.use(VueRouter);
 
@@ -53,5 +54,10 @@ export default new VueRouter({
       name: 'add-place',
       component: AddBathroom,
     },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile
+    }
   ],
 });
