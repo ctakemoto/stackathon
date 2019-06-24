@@ -8,7 +8,6 @@ const passport = require('passport');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const db = require('./db');
 const sessionStore = new SequelizeStore({ db });
-const SERVER_PORT = process.env.SERVER_PORT || 8080;
 const app = express();
 // const socketio = require('socket.io')
 module.exports = app;
@@ -22,6 +21,7 @@ module.exports = app;
  * Node process on process.env
  */
 if (process.env.NODE_ENV !== 'production') require('../../secrets');
+const SERVER_PORT = process.env.SERVER_PORT || 3000;
 
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id));
