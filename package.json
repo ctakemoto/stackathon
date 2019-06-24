@@ -1,0 +1,14 @@
+{
+  "name": "toilt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/src/app.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "keywords": [],
+  "author": "Cara Takemoto",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {}
+}
