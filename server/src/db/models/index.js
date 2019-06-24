@@ -15,3 +15,6 @@ Comment.belongsTo(User);
 
 Place.hasMany(Comment);
 Comment.belongsTo(Place);
+
+User.belongsToMany(Place, { through: 'bookmark' });
+Place.belongsToMany(User, { through: 'bookmark' });

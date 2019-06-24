@@ -39,6 +39,16 @@ const createApp = () => {
   // logging middleware
   app.use(morgan('dev'));
 
+  // allow access to our api
+  app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header(
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, Content-Type, Accept'
+    );
+    next();
+  });
+
   // body parsing middleware
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
@@ -60,7 +70,7 @@ const createApp = () => {
   // session middleware with passport
   app.use(
     session({
-      secret: process.env.SESSION_SECRET || 'my best friend is Cody',
+      secret: process.env.SESSION_SECRET || 'random secret',
       store: sessionStore,
       resave: false,
       saveUninitialized: false,
@@ -74,7 +84,7 @@ const createApp = () => {
   app.use('/api', require('./api'));
 
   // static file-serving middleware
-  app.use(express.static(path.join(__dirname, '..', 'public')));
+  app.use(express.static(path.join(__dirname, '..', '..', 'client', 'public')));
 
   // any remaining requests with an extension (.js, .css, etc.) send 404
   app.use((req, res, next) => {
@@ -89,7 +99,9 @@ const createApp = () => {
 
   // sends index.html
   app.use('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', '..', 'client/public/index.html'));
+    res.sendFile(
+      path.join(__dirname, '..', '..', 'client', 'public/index.html')
+    );
   });
 
   // error handling endware

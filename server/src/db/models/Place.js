@@ -8,6 +8,9 @@ const Place = db.define('place', {
       notEmpty: true,
     },
   },
+  desciption: {
+    type: Sequelize.TEXT,
+  },
   address: {
     type: Sequelize.STRING,
   },
@@ -25,10 +28,21 @@ const Place = db.define('place', {
       max: 180,
     },
   },
+  borough: {
+    type: Sequelize.STRING,
+  },
   coordinates: {
     type: Sequelize.ARRAY(Sequelize.DECIMAL),
   },
   singleStall: {
+    type: Sequelize.ENUM('Yes', 'No', 'Unknown'),
+    defaultValue: 'Unknown',
+  },
+  handicapAccessible: {
+    type: Sequelize.ENUM('Yes', 'No', 'Unknown'),
+    defaultValue: 'Unknown',
+  },
+  openYearRound: {
     type: Sequelize.ENUM('Yes', 'No', 'Unknown'),
     defaultValue: 'Unknown',
   },
