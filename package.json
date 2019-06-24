@@ -4,7 +4,7 @@
   "description": "",
   "main": "server/src/app.js",
   "scripts": {
-    "start": "node src/app.js",
+    "start": "node ./server/src/app.js",
     "serve": "vue-cli-service serve",
     "build-client": "vue-cli-service build",
     "lint-client": "vue-cli-service lint",
