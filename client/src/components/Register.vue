@@ -68,7 +68,7 @@ export default {
       let toastConfig;
 
       try {
-        let { data, status } = await AuthenticationService.register({
+        await AuthenticationService.register({
           email: this.email,
           password: this.password,
           username: this.username,
@@ -79,7 +79,6 @@ export default {
           title: 'Success',
           message: 'Registration successful',
         };
-        this.$route.push('/login');
       } catch (error) {
         console.dir(error);
         toastConfig = {
@@ -90,6 +89,7 @@ export default {
       }
 
       this.$bvToast.toast(toastConfig.message, toastConfig);
+      this.$router.push({ path: '/login' });
     },
   },
   // mounted() {

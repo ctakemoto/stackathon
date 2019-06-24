@@ -28,7 +28,7 @@ export default {
   computed: {
     userGreeting() {
       return `Welcome, ${this.$store.state.user.name ||
-        this.$store.state.user.email}`;
+        this.$store.state.user.username}`;
     },
   },
   methods: {
