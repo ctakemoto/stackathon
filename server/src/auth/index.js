@@ -1,10 +1,12 @@
 const router = require('express').Router();
-const User = require('../db/models/user');
+const db = require('../db');
 module.exports = router;
 
 router.post('/login', async (req, res, next) => {
   try {
-    const user = await User.findOne({ where: { email: req.body.email } });
+    const user = await db.models.user.findOne({
+      where: { email: req.body.email },
+    });
     if (!user) {
       console.log('No such user found:', req.body.email);
       res.status(401).send('Wrong username and/or password');
@@ -21,7 +23,7 @@ router.post('/login', async (req, res, next) => {
 
 router.post('/signup', async (req, res, next) => {
   try {
-    const user = await User.create({
+    const user = await db.models.user.create({
       email: req.body.email,
       password: req.body.password,
       username: req.body.username,
