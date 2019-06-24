@@ -40,12 +40,20 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+html {
+  background-color: #222;
+}
 .home {
   width: 100vw;
   height: 600px;
+  /* background-color: #222;
+  z-index: -103; */
 }
 .jumbotron {
   position: relative;
+  height: 100vh;
+  width: 100vw;
+  background-color: #222;
   z-index: -101;
   color: white;
   text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.521);
@@ -58,7 +66,7 @@ export default {
   bottom: 0;
   left: 0;
   overflow: hidden;
-  z-index: -100;
+  z-index: -1;
   width: 100%;
   height: 100%;
   object-fit: cover;

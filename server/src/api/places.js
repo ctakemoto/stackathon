@@ -90,13 +90,13 @@ router.post('/geocode', async (req, res, next) => {
 
 router.post('/reverse-geocode', async (req, res, next) => {
   try {
-    let query = [req.body.lat, req.body.long].join(',');
+    let query = [req.body.long, req.body.lat].join(',');
     // check if request has been made, if so then just return that result
     if (!mapboxCache.reverseGeocode[query]) {
       await geo.reverseGeocode(
         'mapbox.places',
-        req.body.lat,
         req.body.long,
+        req.body.lat,
         function(err, geoData) {
           if (err || !geoData) {
             res.status(401).send('Error looking up coords');

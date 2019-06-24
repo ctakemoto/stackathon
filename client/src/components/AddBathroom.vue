@@ -1,34 +1,32 @@
 <template>
   <div class="addBathroom">
     <h1>Add a Place</h1>
-    <b-form>
+    <b-form autocomplete="off">
       <b-form-group id="input-group-1" label="Name:" label-for="input-1">
-        <b-form-input
-          id="input-1"
-          type="text"
-          name="name"
-          placeholder="name"
-          v-model="fields.name"
-          required
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group id="input-group-2" label="Description:" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          type="text"
-          name="description"
-          placeholder="description"
-          v-model="fields.description"
-          required
-        ></b-form-input>
+        <b-form-input id="input-1" type="text" name="name" v-model="fields.name" required></b-form-input>
       </b-form-group>
       <b-form-group id="input-group-3" label="Address:" label-for="input-3">
         <b-form-input
           id="input-3"
           type="text"
           name="address"
-          placeholder="address"
           v-model="fields.address"
+          @focus="showCollapse = true"
+          @keyup.enter.native="setLocation"
+          required
+        ></b-form-input>
+        <b-collapse id="collapse-map" v-model="showCollapse" v-on:click="setAddress">
+          <b-alert show variant="info">You can click on the map to pick the address</b-alert>
+          <MapView :mapCoords="mapCoords" :additionalCallback="setAddress"/>
+        </b-collapse>
+      </b-form-group>
+      <b-form-group id="input-group-2" label="Description:" label-for="input-2">
+        <b-form-input
+          id="input-2"
+          type="text"
+          name="description"
+          v-model="fields.description"
+          @focus="showCollapse = false"
           required
         ></b-form-input>
       </b-form-group>
@@ -115,6 +113,7 @@
 
 <script>
 import PlacesService from '../services/PlacesService';
+import MapView from './MapView';
 export default {
   name: 'addBathroom',
   data() {
@@ -148,7 +147,12 @@ export default {
         { value: 'Poor', text: 'Poor' },
         { value: 'Unknown', text: 'Unknown' },
       ],
+      showCollapse: false,
+      mapCoords: this.$store.state.coords,
     };
+  },
+  components: {
+    MapView,
   },
   methods: {
     async addPlace() {
@@ -166,6 +170,30 @@ export default {
         this.$bvToast.toast(toastConfig.message, toastConfig);
       }
     },
+    async setAddress(lat, long) {
+      try {
+        console.log('lat', lat, 'long', long);
+        const { data } = await PlacesService.getAddressFromCoords(lat, long);
+        this.fields.address = data.address;
+        this.fields.latitude = lat;
+        this.fields.longitude = long;
+      } catch (error) {
+        console.error(error);
+        let toastConfig = {
+          variant: 'danger',
+          title: 'Error getting address',
+          message: error.response.data,
+        };
+        this.$bvToast.toast(toastConfig.message, toastConfig);
+      }
+    },
+    async setLocation(e) {
+      e.preventDefault();
+      const { data } = await PlacesService.getCoordsFromAddress(
+        this.fields.address
+      );
+      this.mapCoords = data.coords;
+    },
   },
 };
 </script>
@@ -180,5 +208,8 @@ export default {
   border: 1px solid #c2c2c2;
   padding: 10px;
   border-radius: 10px;
+}
+#collapse-map {
+  margin: 10px;
 }
 </style>

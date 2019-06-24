@@ -3,7 +3,13 @@
     <h1>Find Bathrooms Near You</h1>
 
     <b-input-group>
-      <b-form-input v-model="address" placeholder="Enter an address" v-on:submit="setLocation" trim></b-form-input>
+      <b-form-input
+        v-model="address"
+        placeholder="Enter an address"
+        v-on:submit="setLocation"
+        @keyup.enter.native="setLocation"
+        trim
+      ></b-form-input>
       <b-input-group-append>
         <b-button variant="outline-success" v-on:click="setLocation">GO</b-button>
       </b-input-group-append>

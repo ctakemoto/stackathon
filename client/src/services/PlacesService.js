@@ -16,10 +16,10 @@ export default {
       address: address,
     });
   },
-  getAddressFromCoords(latitude, longitude) {
+  getAddressFromCoords(lat, long) {
     return Api().post('api/places/reverse-geocode', {
-      latitude,
-      longitude,
+      lat,
+      long,
     });
   },
   addComment(comment) {

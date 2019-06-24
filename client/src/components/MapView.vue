@@ -54,6 +54,9 @@ export default {
       type: String,
       default: '300px',
     },
+    additionalCallback: {
+      type: Function,
+    },
   },
   computed: {
     style() {
@@ -77,6 +80,8 @@ export default {
         ).addTo(this.map);
 
         this.addMarker(this.mapCoords);
+
+        this.map.on('click', this.onMapClick);
 
         this.mapErr = false;
       } catch (error) {
@@ -114,6 +119,13 @@ export default {
           fillOpacity: 0.3,
           radius: this.areaRadius,
         }).addTo(this.map);
+      }
+    },
+    onMapClick(e) {
+      console.log('event', e);
+      this.$store.dispatch('setSelectedLocation', [e.latlng.lat, e.latlng.lng]);
+      if (this.additionalCallback) {
+        this.additionalCallback(e.latlng.lat, e.latlng.lng);
       }
     },
     createIcon() {

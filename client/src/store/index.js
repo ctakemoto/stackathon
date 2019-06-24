@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import PlacesServices from '../services/PlacesService';
 
 Vue.use(Vuex);
 
@@ -12,6 +11,7 @@ export default new Vuex.Store({
     allBathrooms: [],
     selectedBathroom: {},
     coords: [40.705450817990055, -74.00917347517144],
+    selectedLocation: [],
   },
   mutations: {
     setUser(state, user) {
@@ -41,6 +41,9 @@ export default new Vuex.Store({
         comment,
       ];
     },
+    setSelectedLocation(state, coords) {
+      state.selectedLocation = coords;
+    },
   },
   actions: {
     setUser({ commit }, user) {
@@ -63,6 +66,9 @@ export default new Vuex.Store({
     },
     addComment({ commit }, comment) {
       commit('addComment', comment);
+    },
+    setSelectedLocation({ commit }, coords) {
+      commit('setSelectedLocation', coords);
     },
   },
 });
