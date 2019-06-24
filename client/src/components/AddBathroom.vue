@@ -172,7 +172,6 @@ export default {
     },
     async setAddress(lat, long) {
       try {
-        console.log('lat', lat, 'long', long);
         const { data } = await PlacesService.getAddressFromCoords(lat, long);
         this.fields.address = data.address;
         this.fields.latitude = lat;

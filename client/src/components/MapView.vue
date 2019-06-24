@@ -60,7 +60,7 @@ export default {
   },
   computed: {
     style() {
-      return `height: ${this.mapHeight}`;
+      return `height: ${this.mapHeight}; width: 100%`;
     },
   },
   methods: {
@@ -122,7 +122,6 @@ export default {
       }
     },
     onMapClick(e) {
-      console.log('event', e);
       this.$store.dispatch('setSelectedLocation', [e.latlng.lat, e.latlng.lng]);
       if (this.additionalCallback) {
         this.additionalCallback(e.latlng.lat, e.latlng.lng);

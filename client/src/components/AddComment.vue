@@ -1,7 +1,7 @@
 <template>
   <b-container class="add-comment">
     <div v-if="showCommentForm">
-      <h3>Add a Review</h3>
+      <h3>Add a Comment</h3>
       <b-form>
         <b-form-group id="input-group-1" label="Subject:" label-for="input-1">
           <b-form-input
