@@ -79,6 +79,9 @@ export default {
           title: 'Success',
           message: 'Registration successful',
         };
+
+        this.$router.push({ path: '/login' });
+
       } catch (error) {
         console.dir(error);
         toastConfig = {

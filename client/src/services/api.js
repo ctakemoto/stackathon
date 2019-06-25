@@ -4,6 +4,6 @@ import axios from 'axios';
 export default () => {
   return axios.create({
     // environmental variables are defined in .env
-    baseURL: process.env.VUE_APP_SERVER_BASE_URL || `http://localhost:8080`,
+    baseURL: process.env.VUE_APP_BASE_URL,
   });
 };

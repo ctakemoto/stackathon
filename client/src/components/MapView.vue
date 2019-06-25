@@ -93,12 +93,6 @@ export default {
       }
     },
     addMarker(coords) {
-      // let markerIcon = this.createIcon();
-
-      // L.marker(coords, {
-      //   icon: markerIcon,
-      // }).addTo(this.map);
-
       // remove prior markers
       if (this.marker) {
         this.map.removeLayer(this.marker);
@@ -106,6 +100,12 @@ export default {
       if (this.area) {
         this.map.removeLayer(this.area);
       }
+
+      // let markerIcon = this.createIcon();
+
+      // this.marker = L.marker(coords, {
+      //   icon: markerIcon,
+      // }).addTo(this.map);
 
       this.marker = L.circle(coords, {
         color: '#222',
