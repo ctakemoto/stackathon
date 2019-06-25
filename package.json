@@ -10,7 +10,8 @@
     "lint-client": "vue-cli-service lint",
     "start-dev": "node ./server/node_modules/nodemon/bin/nodemon.js ./server/src/app.js --exec 'npm run lint-server && node'",
     "lint-server": "./server/node_modules/.bin/eslint src/*.js",
-    "seed": "node ./server/scripts/seed.js"
+    "seed": "node ./server/scripts/seed.js",
+    "deploy": "./server/script/deploy"
   },
   "keywords": [],
   "author": "Cara Takemoto",
