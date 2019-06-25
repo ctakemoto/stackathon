@@ -21,7 +21,7 @@ module.exports = app;
  * Node process on process.env
  */
 if (process.env.NODE_ENV !== 'production') require('../../secrets');
-const SERVER_PORT = process.env.SERVER_PORT || 3000;
+const SERVER_PORT = process.env.PORT || 3000;
 
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id));
