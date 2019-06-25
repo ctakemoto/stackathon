@@ -7,3 +7,4 @@ export default () => {
     baseURL: process.env.VUE_APP_SERVER_BASE_URL || `http://localhost:3000`,
   });
 };
+console.log('process.env', process.env);
