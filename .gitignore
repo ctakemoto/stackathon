@@ -4,16 +4,16 @@ secrets.js
 .DS_Store
 
 # generated build files
-client/dist
+dist
 
 # data
 data/*
 
 # local env files
-client/.env.local
-client/.env.*.local
-client/.env
-client/.env.prod
+.env.local
+.env.*.local
+.env
+.env.prod
 
 # Log files
 npm-debug.log*
