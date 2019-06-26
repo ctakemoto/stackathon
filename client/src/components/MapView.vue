@@ -10,6 +10,7 @@
 <script>
 import L from 'leaflet';
 import Loading from './LoadingSpinner';
+import PlacesService from '../services/PlacesService';
 export default {
   name: 'mapid',
   data() {
@@ -68,7 +69,7 @@ export default {
     initMap(maxZoom = 20) {
       try {
         this.map = L.map('map-view').setView(this.mapCoords, this.zoom);
-
+        console.log('process.env', process.env);
         this.tileLayer = L.tileLayer(
           `https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}`,
           {
@@ -79,6 +80,7 @@ export default {
             accessToken: process.env.VUE_APP_MAPBOX_ACCESS_TOKEN,
           }
         ).addTo(this.map);
+        // this.tileLayer = PlacesService.getTileLayer().addTo(this.map);
 
         this.addMarker(this.mapCoords);
 

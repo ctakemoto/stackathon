@@ -56,10 +56,10 @@
 </template>
 
 <script>
-import PlacesServices from '../services/PlacesService';
 import Loading from './LoadingSpinner';
 import MapView from './MapView';
 import AddComment from './AddComment';
+import { mapActions } from 'vuex';
 export default {
   name: 'bathroom-detail',
   methods: {},
@@ -71,36 +71,15 @@ export default {
   },
   computed: {
     bathroom() {
-      return this.$store.state.selectedBathroom;
+      return this.$store.state.place.selectedBathroom;
     },
   },
   methods: {
-    format(date, format) {
-      dateFormat(date, format);
-    },
+    ...mapActions(['setBathroom']),
     async getPlace() {
       // retrieve data for specific bathroom
       try {
-        const { data } = await PlacesServices.getPlace(this.$route.params.id);
-
-        let bathroom = data;
-
-        if (!bathroom.address && bathroom.latitude && bathroom.longitude) {
-          // if it has coords but no address, go fetch address
-          const addressResponse = await PlacesServices.getAddressFromCoords(
-            bathroom.latitude,
-            bathroom.longitude
-          );
-          bathroom.address = addressResponse.data.address;
-        }
-        if ((!bathroom.latitude || !bathroom.longitude) && bathroom.address) {
-          const coordsResponse = await PlacesServices.getCoordsFromAddress(
-            bathroom.address
-          );
-          bathroom.coordinates = coordsResponse.data.coords;
-          console.log('bathroom.comments', bathroom.comments);
-        }
-        this.$store.dispatch('setBathroom', bathroom);
+        await this.setBathroom(this.$route.params.id);
       } catch (error) {
         console.error(error);
         this.$bvToast.toast(error.response.data, {

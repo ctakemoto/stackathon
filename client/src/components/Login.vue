@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import AuthenticationService from '../services/AuthenticationService';
 export default {
   name: 'login',
   data() {
@@ -43,12 +42,10 @@ export default {
     async login(e) {
       e.preventDefault();
       try {
-        let response = await AuthenticationService.login({
+        await this.$store.dispatch('login', {
           email: this.email,
           password: this.password,
         });
-
-        this.$store.dispatch('setUser', response.data);
         this.$router.push('/');
       } catch (error) {
         console.error(error);

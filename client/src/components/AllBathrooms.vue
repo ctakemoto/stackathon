@@ -23,17 +23,17 @@
 </template>
 
 <script>
-import PlacesServices from '../services/PlacesService';
 import SingleBathroom from './SingleBathroom';
 import Loading from './LoadingSpinner';
+import { mapActions } from 'vuex';
+
 export default {
   name: 'allBathrooms',
   methods: {
+    ...mapActions(['setAllBathrooms']),
     async getBathrooms() {
       try {
-        const { data } = await PlacesServices.getPlaces();
-
-        this.$store.dispatch('setAllBathrooms', data);
+        await this.setAllBathrooms();
         this.isLoading = false;
       } catch (error) {
         console.error(error);
@@ -53,7 +53,7 @@ export default {
   },
   computed: {
     bathrooms() {
-      const items = this.$store.state.allBathrooms;
+      const items = this.$store.state.place.allBathrooms;
       // Return just page of items needed
       return items.slice(
         (this.currentPage - 1) * this.perPage,
@@ -61,7 +61,7 @@ export default {
       );
     },
     numBathrooms() {
-      return this.$store.state.allBathrooms.length;
+      return this.$store.state.place.allBathrooms.length;
     },
   },
   components: {

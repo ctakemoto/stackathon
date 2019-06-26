@@ -25,4 +25,7 @@ export default {
   addComment(comment) {
     return Api().post(`api/comments/${comment.placeId}`, comment);
   },
+  getTileLayer() {
+    return Api().get('api/map-tile');
+  },
 };

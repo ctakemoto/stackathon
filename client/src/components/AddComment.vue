@@ -34,7 +34,6 @@
 </template>
 
 <script>
-import PlacesServices from '../services/PlacesService';
 export default {
   name: 'add-comment',
   data() {
@@ -43,11 +42,6 @@ export default {
       text: '',
       showCommentForm: false,
     };
-  },
-  watch: {
-    showCommentForm: function(val) {
-      console.log('showCommentForm', val);
-    },
   },
   props: {
     bathroomId: {
@@ -58,14 +52,12 @@ export default {
   methods: {
     async addComment() {
       try {
-        const { data } = await PlacesServices.addComment({
+        await this.$store.dispatch('addComment', {
           title: this.subject,
           body: this.text,
-          userId: this.$store.state.user.id,
+          userId: this.$store.state.user.user.id,
           placeId: this.bathroomId,
         });
-
-        this.$store.dispatch('addComment', data);
         // hide form
         this.showCommentForm = false;
         // clear the form

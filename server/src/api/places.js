@@ -2,6 +2,7 @@ const router = require('express').Router();
 const db = require('../db');
 const geo = require('mapbox-geocoding');
 geo.setAccessToken(process.env.MAPBOX_ACCESS_TOKEN);
+// const L = require('leaflet');
 
 const mapboxCache = require('./cache/mapboxCache');
 module.exports = router;
@@ -14,6 +15,24 @@ router.get('/', async (req, res, next) => {
     next(err);
   }
 });
+
+// router.get('/map-tile', async (req, res, next) => {
+//   try {
+//     const tileLayer = await L.tileLayer(
+//       `https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}`,
+//       {
+//         maxZoom: 20,
+//         attribution:
+//           'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+//         id: 'mapbox.streets',
+//         accessToken: process.env.MAPBOX_ACCESS_TOKEN,
+//       }
+//     );
+//     res.json(tileLayer);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 router.get('/:placeId', async (req, res, next) => {
   try {

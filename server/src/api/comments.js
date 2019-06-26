@@ -4,6 +4,7 @@ module.exports = router;
 
 router.post('/:placeId', async (req, res, next) => {
   try {
+    console.log('req.params.placeId', req.params.placeId);
     const place = await db.models.place.findOne({
       where: {
         id: +req.params.placeId,

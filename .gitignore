@@ -6,6 +6,9 @@ secrets.js
 # generated build files
 client/dist
 
+# data
+data/*
+
 # local env files
 client/.env.local
 client/.env.*.local

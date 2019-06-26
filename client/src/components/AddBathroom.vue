@@ -112,8 +112,8 @@
 </template>
 
 <script>
-import PlacesService from '../services/PlacesService';
 import MapView from './MapView';
+import { mapActions } from 'vuex';
 export default {
   name: 'addBathroom',
   data() {
@@ -148,18 +148,20 @@ export default {
         { value: 'Unknown', text: 'Unknown' },
       ],
       showCollapse: false,
-      mapCoords: this.$store.state.coords,
+      mapCoords: this.$store.state.location.coords,
     };
   },
   components: {
     MapView,
   },
   methods: {
+    ...mapActions([
+      'addBathroom', // map `this.addBathroom()` to `this.$store.dispatch('addBathroom')`
+    ]),
     async addPlace() {
       try {
-        const { data } = await PlacesService.addPlace(this.fields);
-        this.$store.dispatch('addBathroom', data);
-        this.$router.push(`/bathrooms/${data.id}`);
+        let newBathroomId = await this.addBathroom(this.fields);
+        this.$router.push(`/bathrooms/${newBathroomId}`);
       } catch (error) {
         console.error(error);
         let toastConfig = {

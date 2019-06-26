@@ -27,10 +27,8 @@ git checkout -b deploy
 
 npm run build-client
 
-mv dist/ client/dist/
-
 # "force" add the otherwise gitignored build files
-git add -f client/dist/*
+git add -f dist/*
 
 # create a commit, even if nothing changed
 git commit --allow-empty -m 'Deploying'

@@ -12,23 +12,26 @@
       </b-navbar-nav>
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <b-nav-item to="/register" v-if="!$store.state.isLoggedIn">Sign Up</b-nav-item>
-        <b-nav-item to="/login" v-if="!$store.state.isLoggedIn">Login</b-nav-item>
-        <b-nav-item to="/profile" v-if="$store.state.isLoggedIn">{{userGreeting}}</b-nav-item>
-        <b-nav-item v-if="$store.state.isLoggedIn" @click="logout">Logout</b-nav-item>
+        <b-nav-item to="/register" v-if="!this.isLoggedIn">Sign Up</b-nav-item>
+        <b-nav-item to="/login" v-if="!this.isLoggedIn">Login</b-nav-item>
+        <b-nav-item to="/profile" v-if="this.isLoggedIn">{{userGreeting}}</b-nav-item>
+        <b-nav-item v-if="this.isLoggedIn" @click="logout">Logout</b-nav-item>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
 </template>
 
 <script>
-import AuthenticationService from '../services/AuthenticationService';
+import { mapState } from 'vuex';
 export default {
   name: 'navbar',
   computed: {
     userGreeting() {
-      return `Welcome, ${this.$store.state.user.name ||
-        this.$store.state.user.username}`;
+      return `Welcome, ${this.$store.state.user.user.name ||
+        this.$store.state.user.user.username}`;
+    },
+    isLoggedIn() {
+      return this.$store.state.user.isLoggedIn;
     },
   },
   methods: {
@@ -36,13 +39,13 @@ export default {
       // set toast based on status
       let toastConfig;
       try {
-        let { data, status } = await AuthenticationService.logout();
+        await this.$store.dispatch('logout');
+
         toastConfig = {
           variant: 'success',
           title: 'Success',
           message: 'Logout successful',
         };
-        this.$store.dispatch('logout');
       } catch (error) {
         console.error(error);
         toastConfig = {

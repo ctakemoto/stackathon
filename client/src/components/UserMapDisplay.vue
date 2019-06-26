@@ -16,7 +16,7 @@
     </b-input-group>
     <MapView
       v-if="!this.posErr&&this.posIsReady"
-      v-bind:mapCoords="this.$store.state.coords"
+      v-bind:mapCoords="this.$store.state.location.coords"
       v-bind:includeArea="true"
       v-bind:mapHeight="'400px'"
     />

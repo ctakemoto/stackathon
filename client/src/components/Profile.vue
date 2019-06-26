@@ -19,7 +19,10 @@ export default {
   name: 'profile',
   computed: {
     user() {
-      return this.$store.state.user;
+      return this.$store.state.user.user;
+    },
+    test() {
+      return process.env.VUE_APP_TEST_VAR;
     },
   },
 };
