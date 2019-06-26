@@ -69,7 +69,7 @@ export default {
     initMap(maxZoom = 20) {
       try {
         this.map = L.map('map-view').setView(this.mapCoords, this.zoom);
-        console.log('process.env', process.env);
+
         this.tileLayer = L.tileLayer(
           `https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}`,
           {
@@ -80,7 +80,6 @@ export default {
             accessToken: process.env.VUE_APP_MAPBOX_ACCESS_TOKEN,
           }
         ).addTo(this.map);
-        // this.tileLayer = PlacesService.getTileLayer().addTo(this.map);
 
         this.addMarker(this.mapCoords);
 
@@ -117,7 +116,7 @@ export default {
       }).addTo(this.map);
 
       if (this.includeArea) {
-        //  add area circle
+        // add area circle
         this.area = L.circle(coords, {
           color: '#222',
           fillColor: '#222',

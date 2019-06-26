@@ -114,6 +114,7 @@
 <script>
 import MapView from './MapView';
 import { mapActions } from 'vuex';
+import PlacesService from '../services/PlacesService';
 export default {
   name: 'addBathroom',
   data() {

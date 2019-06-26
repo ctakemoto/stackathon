@@ -26,12 +26,12 @@ import { mapState } from 'vuex';
 export default {
   name: 'navbar',
   computed: {
+    ...mapState({
+      user: state => state.user.user,
+      isLoggedIn: state => state.user.isLoggedIn,
+    }),
     userGreeting() {
-      return `Welcome, ${this.$store.state.user.user.name ||
-        this.$store.state.user.user.username}`;
-    },
-    isLoggedIn() {
-      return this.$store.state.user.isLoggedIn;
+      return `Welcome, ${this.user.name || this.user.username}`;
     },
   },
   methods: {
