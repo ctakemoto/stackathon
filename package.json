@@ -11,7 +11,7 @@
     "start-server-dev": "nodemon ./server/src/app.js --exec 'npm run lint-server && node'",
     "lint-server": "eslint ./server/src/*.js",
     "seed": "node ./server/scripts/seed.js",
-    "deploy": "./server/script/deploy",
+    "deploy": "./server/scripts/deploy",
     "start-dev": "npm run start-server-dev && npm run serve"
   },
   "keywords": [],
